@@ -1,0 +1,97 @@
+{
+  "name": "@kalan3/eslint-config",
+  "version": "1.0.0",
+  "description": "Shareable eslint config",
+  "keywords": [
+    "eslint",
+    "eslint-config",
+    "eslintconfig"
+  ],
+  "homepage": "https://github.com/kalan3/eslint-config#readme",
+  "bugs": {
+    "url": "https://github.com/kalan3/eslint-config/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kalan3/eslint-config.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Alan Kechter",
+    "email": "alan@digital-savants.com",
+    "url": "https://github.com/kalan3"
+  },
+  "main": "index.js",
+  "scripts": {
+    "preaudit": "npm install --package-lock --package-lock-only",
+    "audit": "npm audit",
+    "postaudit": "rm package-lock.json",
+    "commit": "standard-commit",
+    "commitlint": "standard-commitlint",
+    "find-unused": "eslint-find-rules -un",
+    "prepublish": "! type safe-publish-latest >/dev/null 2>&1 || safe-publish-latest && in-install || (npm test && npm run find-unused)",
+    "release": "standard-version --release-as patch",
+    "postrelease": "git push --follow-tags && npm publish",
+    "release:major": "standard-version --release-as major && npm run postrelease",
+    "release:minor": "standard-version --release-as minor && npm run postrelease",
+    "pretest": "editorconfig-tools check *",
+    "test": "npm run --silent tests-only",
+    "posttest": "npm run audit",
+    "tests-only": "eslint index.js",
+    "update-deps": "npm-check --update"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "editorconfig-tools": "^0.1.1",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-find-rules": "^4.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "in-publish": "^2.0.1",
+    "npm-check": "^5.9.2",
+    "replace": "^1.2.1",
+    "safe-publish-latest": "^2.0.0",
+    "semver": "^7.3.5",
+    "standard-commit": "^4.2.5",
+    "standard-version": "^9.3.2"
+  },
+  "peerDependencies": {
+    "babel-eslint": ">=10.0.0",
+    "eslint": ">=7.12.1",
+    "eslint-config-standard": ">=16.0.3",
+    "eslint-plugin-import": ">=2.25.3",
+    "eslint-plugin-node": ">=11.1.0",
+    "eslint-plugin-promise": ">=5.0.0"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard-commit": {
+    "types": [
+      "build",
+      "chore",
+      "ci",
+      "docs",
+      "feat",
+      "fix",
+      "perf",
+      "refactor",
+      "revert",
+      "style",
+      "test"
+    ],
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        120
+      ]
+    }
+  }
+}
